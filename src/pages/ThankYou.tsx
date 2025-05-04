@@ -1,39 +1,58 @@
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
-import { CheckCheck, Mail, UserPlus } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Bell, CheckCheck, Mail, Share } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const ThankYou = () => {
-  const [joined, setJoined] = useState(false);
+  const [isAnimated, setIsAnimated] = useState(false);
   const { toast } = useToast();
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Trigger animation after component mounts
+    setIsAnimated(true);
+  }, []);
 
   const handleJoinCommunity = () => {
-    setJoined(true);
+    window.open("https://whatsapp.com/channel/0029Vb6SaPYInlqK7EbPvC2s", "_blank");
     toast({
-      title: "Successfully joined!",
-      description: "Welcome to our exclusive 99 Digitals community!",
+      title: "Opening WhatsApp Channel",
+      description: "Don't forget to press the bell icon for exclusive updates!",
       duration: 5000,
     });
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-700 flex flex-col items-center justify-center p-4">
-      <div className="max-w-3xl w-full space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-700 flex flex-col items-center justify-center p-4 overflow-hidden">
+      <div 
+        className={`max-w-3xl w-full space-y-8 transform transition-all duration-700 ${
+          isAnimated ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+        }`}
+      >
         <div className="text-center">
           <div className="flex justify-center mb-4">
-            <div className="h-20 w-20 bg-green-500 rounded-full flex items-center justify-center">
-              <CheckCheck className="h-10 w-10 text-white" />
+            <div className={`h-20 w-20 bg-green-500 rounded-full flex items-center justify-center transform transition-all duration-700 ${
+              isAnimated ? "scale-100" : "scale-0"
+            }`}>
+              <CheckCheck className="h-10 w-10 text-white animate-pulse" />
             </div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Thank You!</h1>
-          <p className="text-xl text-purple-100 mb-8">Your order has been successfully completed</p>
+          <h1 className={`text-4xl md:text-5xl font-bold text-white mb-2 transition-all duration-700 ${
+            isAnimated ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
+          }`}>
+            Thank You!
+          </h1>
+          <p className={`text-xl text-purple-100 mb-8 transition-all duration-700 delay-100 ${
+            isAnimated ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
+          }`}>
+            Your order has been successfully completed
+          </p>
         </div>
 
-        <Card className="p-6 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border-none shadow-xl">
+        <Card className={`p-6 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border-none shadow-xl transform transition-all duration-700 delay-200 ${
+          isAnimated ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+        }`}>
           <div className="space-y-6">
             <div className="text-center space-y-2">
               <h2 className="text-2xl font-semibold text-white">Order Confirmation</h2>
@@ -44,7 +63,7 @@ const ThankYou = () => {
 
             <div className="bg-white bg-opacity-20 p-4 rounded-lg">
               <div className="flex items-center space-x-3 text-white">
-                <Mail className="h-5 w-5" />
+                <Mail className="h-5 w-5 animate-bounce" />
                 <p>Please check all folders of your email including spam/promotions.</p>
               </div>
             </div>
@@ -56,37 +75,32 @@ const ThankYou = () => {
                     Join Our Exclusive Community
                   </h3>
                   <p className="text-purple-100">
-                    Get special offers, early access to new products, and connect with fellow anime enthusiasts
+                    Get special offers, early access to new products, and exclusive benefits by joining our WhatsApp channel
                   </p>
                 </div>
 
-                {!joined ? (
-                  <Button 
-                    onClick={handleJoinCommunity} 
-                    className="w-full py-6 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold text-lg rounded-lg border-none"
-                  >
-                    <UserPlus className="mr-2 h-5 w-5" /> Join 99 Digitals Community
-                  </Button>
-                ) : (
-                  <div className="bg-green-500 bg-opacity-20 p-4 rounded-lg text-center">
-                    <p className="text-green-300 font-medium flex items-center justify-center">
-                      <CheckCheck className="mr-2 h-5 w-5" /> You've joined our community!
-                    </p>
-                  </div>
-                )}
+                <Button 
+                  onClick={handleJoinCommunity} 
+                  className="w-full py-6 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold text-lg rounded-lg border-none transform transition-all duration-300 hover:scale-105"
+                >
+                  <Share className="mr-2 h-5 w-5" /> Join 99 Digitals Community
+                </Button>
+                
+                <div className="flex items-center justify-center space-x-2 mt-2 text-purple-100">
+                  <Bell className="h-5 w-5 text-yellow-300 animate-pulse" />
+                  <p>Don't forget to press the bell icon to receive notifications!</p>
+                </div>
               </div>
             </div>
           </div>
         </Card>
-
-        <div className="text-center mt-8">
-          <Button 
-            variant="link" 
-            onClick={() => navigate("/")}
-            className="text-purple-100 hover:text-white underline"
-          >
-            Return to Home
-          </Button>
+        
+        <div className={`text-center mt-8 transition-all duration-700 delay-300 ${
+          isAnimated ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+        }`}>
+          <p className="text-purple-100">
+            Need help with your order? Contact our support team.
+          </p>
         </div>
       </div>
     </div>
