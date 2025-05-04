@@ -2,11 +2,12 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
-import { Bell, CheckCheck, Mail, Share } from "lucide-react";
+import { Bell, CheckCheck, External, MessageSquare, Share } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const ThankYou = () => {
   const [isAnimated, setIsAnimated] = useState(false);
+  const [buttonHover, setButtonHover] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -63,7 +64,7 @@ const ThankYou = () => {
 
             <div className="bg-white bg-opacity-20 p-4 rounded-lg">
               <div className="flex items-center space-x-3 text-white">
-                <Mail className="h-5 w-5 animate-bounce" />
+                <MessageSquare className="h-5 w-5 animate-bounce" />
                 <p>Please check all folders of your email including spam/promotions.</p>
               </div>
             </div>
@@ -75,20 +76,23 @@ const ThankYou = () => {
                     Join Our Exclusive Community
                   </h3>
                   <p className="text-purple-100">
-                    Get special offers, early access to new products, and exclusive benefits by joining our WhatsApp channel
+                    Get early access to new releases, special offers, and exclusive content by following our WhatsApp channel
                   </p>
                 </div>
 
                 <Button 
                   onClick={handleJoinCommunity} 
-                  className="w-full py-6 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold text-lg rounded-lg border-none transform transition-all duration-300 hover:scale-105"
+                  onMouseEnter={() => setButtonHover(true)}
+                  onMouseLeave={() => setButtonHover(false)}
+                  className={`w-full py-6 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold text-lg rounded-lg border-none transition-all duration-300 ${buttonHover ? 'scale-105 shadow-lg' : 'scale-100'}`}
                 >
-                  <Share className="mr-2 h-5 w-5" /> Join 99 Digitals Community
+                  <Share className={`mr-2 h-5 w-5 transition-all ${buttonHover ? 'animate-pulse' : ''}`} /> 
+                  Follow Our WhatsApp Channel
                 </Button>
                 
-                <div className="flex items-center justify-center space-x-2 mt-2 text-purple-100">
-                  <Bell className="h-5 w-5 text-yellow-300 animate-pulse" />
-                  <p>Don't forget to press the bell icon to receive notifications!</p>
+                <div className="flex flex-col sm:flex-row items-center justify-center sm:space-x-2 space-y-2 sm:space-y-0 mt-3 text-purple-100 p-3 bg-white bg-opacity-10 rounded-lg">
+                  <Bell className="h-6 w-6 text-yellow-300 animate-pulse" />
+                  <p className="text-center sm:text-left">Don't forget to press the bell icon after following to receive all exclusive updates!</p>
                 </div>
               </div>
             </div>
