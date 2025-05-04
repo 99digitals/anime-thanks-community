@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
-import { Bell, CheckCheck, External, MessageSquare, Share } from "lucide-react";
+import { Bell, CheckCheck, MessageSquare, Share } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const ThankYou = () => {
